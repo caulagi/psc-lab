@@ -1,0 +1,55 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  /* "Private conversation in a crowd" structure for control-structure.
+     Two LARGE central figures (the private pair) facing each other with a
+     glowing link + small secret-glyph clusters; a smaller faded crowd around
+     the edges. Drives the PSC metaphor on the title slide. */
+  html,body{margin:0;padding:0}
+  .stage{width:1280px;height:720px;background:#faf7f1;position:relative;overflow:hidden}
+  .person{position:absolute;text-align:center}
+  .head{border-radius:50%;margin:0 auto}
+  .body{border-radius:50% 50% 16px 16px;margin:-8px auto 0}
+
+  /* small faded crowd around the edges */
+  .n{width:70px;opacity:.5}
+  .n .head{width:34px;height:34px;border:4px solid #aab4c6;background:#e7ebf2}
+  .n .body{width:62px;height:58px;border:4px solid #aab4c6;background:#e7ebf2}
+
+  /* the two large central figures */
+  .big{width:150px}
+  .big .head{width:66px;height:66px}
+  .big .body{width:140px;height:118px}
+  .a .head,.a .body{border:8px solid #d9694f;background:#f7ddd3}
+  .b .head,.b .body{border:8px solid #2e9c8e;background:#d3ede8}
+
+  /* glowing private link between the pair */
+  .link{position:absolute;height:8px;border-radius:6px;background:#f0a07f}
+
+  /* tiny secret-glyph clusters above each of the pair */
+  .glyphs{position:absolute;display:flex;gap:9px}
+  .g{width:16px;height:16px;border:4px solid #34507e}
+  .g.sq{border-radius:3px}
+  .g.ci{border-radius:50%}
+  .g.tr{width:0;height:0;border:none;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:17px solid #34507e}
+</style></head><body>
+<div class="stage">
+  <!-- faded crowd, pushed to the edges -->
+  <div class="person n" style="left:70px;top:120px"><div class="head"></div><div class="body"></div></div>
+  <div class="person n" style="left:60px;top:470px"><div class="head"></div><div class="body"></div></div>
+  <div class="person n" style="left:250px;top:540px"><div class="head"></div><div class="body"></div></div>
+  <div class="person n" style="left:200px;top:90px"><div class="head"></div><div class="body"></div></div>
+  <div class="person n" style="left:1140px;top:140px"><div class="head"></div><div class="body"></div></div>
+  <div class="person n" style="left:1150px;top:470px"><div class="head"></div><div class="body"></div></div>
+  <div class="person n" style="left:980px;top:560px"><div class="head"></div><div class="body"></div></div>
+  <div class="person n" style="left:1020px;top:90px"><div class="head"></div><div class="body"></div></div>
+
+  <!-- the private pair, large and central, facing each other -->
+  <div class="person big a" style="left:430px;top:270px"><div class="head"></div><div class="body"></div></div>
+  <div class="person big b" style="left:700px;top:270px"><div class="head"></div><div class="body"></div></div>
+
+  <!-- glowing private link between their bodies -->
+  <div class="link" style="left:575px;top:360px;width:130px"></div>
+
+  <!-- a few small private symbols floating between the pair -->
+  <div class="glyphs" style="left:585px;top:250px"><span class="g sq"></span><span class="g ci"></span></div>
+</div>
+</body></html>

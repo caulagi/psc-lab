@@ -5,16 +5,17 @@
   "height": 720,
   "negatives": {
     "editorial": "text, words, letters, watermark, logo, people, faces, dark background, neon, clutter, blurry, low quality, ugly",
-    "general": "text, words, letters, watermark, logo, people, faces, clutter, messy, blurry, low quality, jpeg artifacts, ugly"
+    "general": "text, words, letters, watermark, logo, people, faces, clutter, messy, blurry, low quality, jpeg artifacts, ugly",
+    "scene": "real text, words, letters, watermark, logo, dark background, neon, clutter, blurry, low quality, ugly, distorted faces, extra limbs, deformed hands"
   },
   "images": [
     {
       "name": "hero/title",
-      "control": "control-light",
-      "control_strength": 0.45,
-      "seed": 7,
-      "negative": "editorial",
-      "prompt": "Soft paper-cut editorial illustration of a cloud network, layered pastel clouds in coral peach sage-green and sky blue, tiny floating dots and fine threads, light cream background, gentle soft shadows, airy generous negative space, premium, calm, elegant"
+      "control": "control-people",
+      "control_strength": 0.52,
+      "seed": 21,
+      "negative": "scene",
+      "prompt": "Soft paper-cut editorial illustration, warm pastel palette on a light cream background. Two large paper-cut people face each other in the centre — one warm coral, one soft teal — leaning together in a private conversation, joined by a single gentle glowing thread, with a couple of tiny symbols floating between them suggesting a secret language only they share. A small, faded, neutral grey crowd of plain paper people stands far back around the edges. Calm, premium, soft layered shadows, generous space. Simple shapes only — no letters, words or text."
     },
     {
       "name": "hero/section",
