@@ -3,6 +3,7 @@ import logo from './assets/pg-logo.png'
 </script>
 
 <template>
+  <div class="pg-fade"></div>
   <footer class="pg-footer">
     <img :src="logo" alt="Playground Tech" />
     <span>Playground Tech</span>
@@ -10,6 +11,18 @@ import logo from './assets/pg-logo.png'
 </template>
 
 <style scoped>
+/* safeguard: a soft band in the slide's background colour that keeps the
+   footer legible even if a dense slide's content reaches the bottom edge */
+.pg-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 58px;
+  background: linear-gradient(to top, var(--bg) 42%, transparent);
+  z-index: 15;
+  pointer-events: none;
+}
 .pg-footer {
   position: absolute;
   left: 0;
