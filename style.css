@@ -40,14 +40,13 @@
   overflow: hidden;
 }
 
-/* soft pastel blooms */
+/* very faint warm wash (kept symmetric & subtle — no coloured corners) */
 .slidev-layout::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(55% 50% at 10% 6%, rgba(95, 176, 166, 0.16), transparent 60%),
-    radial-gradient(55% 55% at 95% 98%, rgba(224, 138, 111, 0.14), transparent 62%);
+    radial-gradient(80% 80% at 50% 0%, rgba(224, 138, 111, 0.05), transparent 70%);
   pointer-events: none;
   z-index: 0;
 }

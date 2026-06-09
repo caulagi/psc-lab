@@ -2,6 +2,7 @@
 theme: seriph
 title: Private Service Connect in GCP
 info: From VPC plumbing to service-oriented connectivity.
+layout: default
 class: text-left
 transition: slide-left
 mdc: true
