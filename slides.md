@@ -4,7 +4,7 @@ title: Private Service Connect in GCP
 info: From VPC plumbing to service-oriented connectivity.
 layout: default
 class: text-left
-transition: slide-left
+transition: fade-out
 mdc: true
 fonts:
   sans: Hanken Grotesk
@@ -74,7 +74,7 @@ transition: fade-out
 <p class="text-center text-xl mt-8 dim">Each needs a <strong>private path</strong> — without peering whole networks.</p>
 
 ---
-transition: slide-left
+transition: fade-out
 ---
 
 <div class="kicker kicker--pain">The traditional answer</div>
@@ -111,7 +111,7 @@ transition: slide-left
 <p class="text-center dim mt-7">Coupling <strong>networks</strong> — not consuming a <em>service</em>.</p>
 
 ---
-transition: slide-up
+transition: fade-out
 ---
 
 <div class="h-full flex flex-col">
@@ -174,7 +174,7 @@ transition: slide-up
 ---
 layout: center
 class: text-center
-transition: slide-left
+transition: fade-out
 ---
 
 <div class="kicker justify-center">Identity &amp; Access Management</div>
@@ -207,7 +207,7 @@ transition: slide-left
 <p class="lead mt-5">Central, auditable, <em>identity-based</em> — no IP rules, no firewalls.</p>
 
 ---
-transition: slide-left
+transition: fade-out
 ---
 
 <div class="kicker">In one line</div>
@@ -236,7 +236,7 @@ transition: slide-left
 <p class="dim text-center mt-7 text-sm">PSC controls <em>which</em> networks/projects may connect — per-caller identity (mTLS / IAM on the service) is layered on top.</p>
 
 ---
-transition: slide-up
+transition: fade-out
 ---
 
 <div class="kicker">The key idea</div>
@@ -270,7 +270,7 @@ transition: slide-up
 <p class="text-center text-lg mt-3"><strong>Which</strong> consumers may connect is policy — the producer's network stays <em>hidden</em>.</p>
 
 ---
-transition: slide-left
+transition: fade-out
 ---
 
 <div class="kicker">Architecture</div>
@@ -324,7 +324,7 @@ transition: slide-left
 </div>
 
 ---
-transition: slide-left
+transition: fade-out
 ---
 
 <div class="kicker">Calling it</div>
@@ -346,7 +346,7 @@ transition: slide-left
 ---
 layout: center
 class: text-center
-transition: slide-up
+transition: fade-out
 ---
 
 <h1 class="mt-3">Takeaways</h1>
@@ -374,6 +374,7 @@ transition: slide-up
 ---
 layout: center
 class: text-center
+transition: fade-out
 ---
 
 <div class="imground mx-auto mb-8" style="max-width:34rem"><img src="./assets/close.png" /></div>
