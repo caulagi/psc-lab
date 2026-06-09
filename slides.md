@@ -22,7 +22,7 @@ fonts:
     <div class="mt-10 text-2xl font-semibold" style="color:var(--ink)">Pradip Caulagi</div>
     <div class="mt-1 dim" style="font-family:var(--font-mono);font-size:0.95rem">10 June 2026</div>
   </div>
-  <div class="imgpanel" style="flex:1"><img src="./assets/gen/hero/title.png" /></div>
+  <div class="imgpanel" style="flex:1"><img src="./assets/title.png" style="object-position:center top" /></div>
 </div>
 
 <!--

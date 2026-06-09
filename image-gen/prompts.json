@@ -10,14 +10,6 @@
   },
   "images": [
     {
-      "name": "hero/title",
-      "control": "control-people",
-      "control_strength": 0.52,
-      "seed": 21,
-      "negative": "scene",
-      "prompt": "Soft paper-cut editorial illustration, warm pastel palette on a light cream background. Two large paper-cut people face each other in the centre — one warm coral, one soft teal — leaning together in a private conversation, joined by a single gentle glowing thread, with a couple of tiny symbols floating between them suggesting a secret language only they share. A small, faded, neutral grey crowd of plain paper people stands far back around the edges. Calm, premium, soft layered shadows, generous space. Simple shapes only — no letters, words or text."
-    },
-    {
       "name": "hero/section",
       "control": "control-light",
       "control_strength": 0.42,
