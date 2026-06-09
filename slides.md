@@ -17,7 +17,7 @@ fonts:
   <div class="flex-1 flex flex-col justify-center">
     <div class="flex items-center gap-4">
       <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" />
-      <h1 class="!text-6xl !mb-0">Private <span class="grad-psc">Service Connect</span></h1>
+      <h1 class="title-display !text-6xl !mb-0">Private <span class="grad-psc">Service Connect</span></h1>
     </div>
     <div class="mt-10 text-2xl font-semibold" style="color:var(--ink)">Pradip Caulagi &amp; Pramod Kumar</div>
     <div class="mt-1 dim" style="font-family:var(--font-mono);font-size:0.95rem">10 June 2026</div>
