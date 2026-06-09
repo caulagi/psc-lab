@@ -15,17 +15,12 @@ fonts:
 
 <div class="flex items-stretch gap-12 h-full">
   <div class="flex-1 flex flex-col justify-center">
-    <div class="kicker">GCP Networking · PSC Lab</div>
-    <div class="flex items-center gap-4 mt-6">
+    <div class="flex items-center gap-4">
       <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" />
       <h1 class="!text-6xl !mb-0">Private <span class="grad-psc">Service Connect</span></h1>
     </div>
-    <p class="lead mt-5 max-w-lg">Reach a private service across VPCs — without the network plumbing.</p>
-    <div class="tag-row mt-8 items-center">
-      <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">VPC peering</span></span>
-      <span class="arrow">→</span>
-      <span class="svc svc--glow !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">service-oriented</span></span>
-    </div>
+    <div class="mt-10 text-2xl font-semibold" style="color:var(--ink)">Pradip Caulagi</div>
+    <div class="mt-1 dim" style="font-family:var(--font-mono);font-size:0.95rem">10 June 2026</div>
   </div>
   <div class="imgpanel" style="flex:1"><img src="./assets/gen/hero/title.png" /></div>
 </div>
