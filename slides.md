@@ -12,19 +12,21 @@ fonts:
   weights: '300,400,500,600,700,800'
 ---
 
-<div class="kicker">GCP Networking · PSC Lab</div>
-
-<div class="flex items-center gap-5 mt-8">
-  <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" />
-  <h1 class="!text-7xl !mb-0">Private <span class="grad-psc">Service Connect</span></h1>
-</div>
-
-<p class="lead mt-5 max-w-xl">Reach a private service across VPCs — without the network plumbing.</p>
-
-<div class="tag-row mt-10 items-center">
-  <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">VPC peering</span></span>
-  <span class="arrow">→</span>
-  <span class="svc svc--glow !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">service-oriented</span></span>
+<div class="flex items-stretch gap-12 h-full">
+  <div class="flex-1 flex flex-col justify-center">
+    <div class="kicker">GCP Networking · PSC Lab</div>
+    <div class="flex items-center gap-4 mt-6">
+      <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" />
+      <h1 class="!text-6xl !mb-0">Private <span class="grad-psc">Service Connect</span></h1>
+    </div>
+    <p class="lead mt-5 max-w-lg">Reach a private service across VPCs — without the network plumbing.</p>
+    <div class="tag-row mt-8 items-center">
+      <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">VPC peering</span></span>
+      <span class="arrow">→</span>
+      <span class="svc svc--glow !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">service-oriented</span></span>
+    </div>
+  </div>
+  <div class="imgpanel" style="flex:1"><img src="./assets/gen/hero/title.png" /></div>
 </div>
 
 <!--
@@ -36,29 +38,20 @@ publish/consume model.
 transition: fade-out
 ---
 
-<div class="kicker">The problem</div>
-<h1 class="mt-5">Two VPCs. One private call.</h1>
-
-<div class="flex items-center justify-center gap-10 mt-16">
-  <div class="svc svc--pain">
-    <img src="./assets/gcp/compute_engine.svg" class="gcp gcp--lg" />
-    <div class="svc__label">Client</div>
-    <div class="svc__meta">Consumer VPC</div>
+<div class="flex items-stretch gap-12 h-full">
+  <div class="flex-1 flex flex-col justify-center">
+    <div class="kicker">The problem</div>
+    <h1 class="mt-4">Two VPCs.<br/>One private call.</h1>
+    <p class="lead mt-5 max-w-md">A client in one VPC needs a service in another — no public IP, different project, no shared routing.</p>
+    <div class="tag-row mt-6">
+      <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">Client</span></span>
+      <span class="arrow">→ ? →</span>
+      <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">Service</span></span>
+    </div>
+    <p v-click class="text-xl mt-8 dim">How do you connect them <strong>privately</strong>?</p>
   </div>
-
-  <div class="text-center">
-    <div class="text-6xl faint leading-none">?</div>
-    <div class="svc__meta mt-3">no public IP<br/>different project</div>
-  </div>
-
-  <div class="svc svc--pain">
-    <img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" />
-    <div class="svc__label">Service</div>
-    <div class="svc__meta">Producer VPC</div>
-  </div>
+  <div class="imgpanel" style="flex:1"><img src="./assets/gen/hero/section.png" /></div>
 </div>
-
-<p v-click class="text-center text-xl mt-14 dim">How do you connect them <strong>privately</strong>?</p>
 
 ---
 transition: slide-left
@@ -159,7 +152,7 @@ transition: slide-up
     <div class="prob__viz">
       <img src="./assets/gcp/compute_engine.svg" class="gcp" />
       <span class="conn conn--bad !w-8"></span>
-      <div class="exposed !border-amber-400/60">
+      <div class="exposed">
         <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--sm" />
         <img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--sm" />
       </div>
@@ -168,7 +161,7 @@ transition: slide-up
     <div class="prob__sub">you must know their subnets &amp; IPs</div>
   </div>
 
-  <div class="prob !bg-transparent !border-rose-400/30 justify-center text-center">
+  <div class="prob justify-center text-center" style="background:rgba(217,105,79,0.06);border-color:rgba(217,105,79,0.4)">
     <div class="text-lg">You wanted <strong>one service</strong>.</div>
     <div class="grad-pain text-2xl font-bold mt-1">You bought their<br/>whole network.</div>
   </div>
@@ -227,6 +220,40 @@ transition: slide-left
 <p class="text-center dim mt-7">The VPCs <strong>never merge</strong>. You call an IP you own.</p>
 
 ---
+transition: slide-left
+---
+
+<div class="kicker">Architecture</div>
+<h1 class="mt-3">PSC: the key elements</h1>
+<p class="lead mt-2 mb-5">Connectivity features built into GCP's VPC — not your routing.</p>
+
+<div class="flex gap-8 items-stretch">
+  <div class="grid grid-cols-2 gap-4 flex-1">
+    <div class="prob">
+      <div class="chip--ip chip self-start">01</div>
+      <div class="prob__title mt-2">Consumer endpoint</div>
+      <div class="prob__sub">A forwarding rule + internal IP inside your VPC. Traffic to the service enters here, at a local address you own.</div>
+    </div>
+    <div class="prob">
+      <div class="chip--ip chip self-start">02</div>
+      <div class="prob__title mt-2">Service attachment</div>
+      <div class="prob__sub">The producer's published surface, fronted by an internal load balancer. It accepts or rejects each connection.</div>
+    </div>
+    <div class="prob">
+      <div class="chip--ip chip self-start">03</div>
+      <div class="prob__title mt-2">PSC NAT subnet</div>
+      <div class="prob__sub">A dedicated producer-side subnet. Google source-NATs consumer traffic into it — so overlapping consumer IPs stop mattering.</div>
+    </div>
+    <div class="prob">
+      <div class="chip--ip chip self-start">04</div>
+      <div class="prob__title mt-2">Connection brokering</div>
+      <div class="prob__sub">Google's fabric brokers endpoint ↔ attachment. One-way, no peering; the producer controls accept / reject.</div>
+    </div>
+  </div>
+  <div class="imgpanel" style="flex:0 0 32%"><img src="./assets/gen/variants/1-editorial.png" /></div>
+</div>
+
+---
 layout: default
 transition: fade
 ---
@@ -281,10 +308,8 @@ layout: center
 class: text-center
 ---
 
-<img src="./assets/gcp/private_service_connect.svg" class="gcp mx-auto" style="width:84px;height:84px" />
+<div class="imground mx-auto mb-8" style="max-width:30rem"><img src="./assets/gen/hero/close.png" /></div>
 
-<div class="text-6xl font-extrabold mt-6" style="font-family: var(--font-display); letter-spacing:-.04em;">
+<div class="text-6xl font-extrabold" style="font-family: var(--font-display); letter-spacing:-.04em;">
   Let's build it <span class="grad-psc">in the lab</span> →
 </div>
-
-<div class="abs-br m-6 chip">psc-lab</div>
