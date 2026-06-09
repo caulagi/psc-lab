@@ -245,9 +245,9 @@ transition: slide-up
 ---
 
 <div class="kicker">The key idea</div>
-<h1 class="mt-3">Authorize by <span class="grad-psc">identity</span>. Forget the network.</h1>
+<h1 class="mt-2 !text-4xl">Authorize by <span class="grad-psc">identity</span>. Forget the network.</h1>
 
-<div class="flex gap-6 items-stretch mt-5">
+<div class="flex gap-6 items-stretch mt-4">
   <div class="prob flex-1">
     <div class="flex items-center gap-3">
       <img src="./assets/gcp/identity_and_access_management.svg" class="gcp" />
@@ -272,7 +272,7 @@ transition: slide-up
   </div>
 </div>
 
-<p class="text-center text-lg mt-5"><strong>Who</strong> talks to <strong>whom</strong> is policy. <em>How</em> packets get there is the platform's job.</p>
+<p class="text-center text-lg mt-3"><strong>Who</strong> talks to <strong>whom</strong> is policy. <em>How</em> packets get there is the platform's job.</p>
 
 ---
 transition: slide-left
