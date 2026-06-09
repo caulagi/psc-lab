@@ -336,9 +336,9 @@ transition: fade-out
   <span class="arrow" style="font-size:1.5rem">→</span>
   <div class="svc"><img src="./assets/gcp/cloud_dns.svg" class="gcp gcp--lg" /><div class="svc__label">Private DNS</div><div class="svc__meta">name → 10.0.1.9</div></div>
   <span class="arrow" style="font-size:1.5rem">→</span>
-  <div class="svc svc--glow"><img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" /><div class="svc__label">PSC endpoint</div><div class="svc__meta">10.0.1.9</div></div>
+  <div class="svc"><img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" /><div class="svc__label">PSC endpoint</div><div class="svc__meta">10.0.1.9</div></div>
   <span class="arrow" style="font-size:1.5rem">→</span>
-  <div class="svc"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" /><div class="svc__label">Service</div></div>
+  <div class="svc"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" /><div class="svc__label">Service</div><div class="svc__meta">10.0.1.9</div></div>
 </div>
 
 <p class="text-center dim mt-14">A Cloud DNS private zone (or Service Directory) maps the name to the endpoint — callers never hardcode an address.</p>
