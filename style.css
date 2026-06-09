@@ -277,6 +277,22 @@
 .imground { border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
 .imground img { width: 100%; display: block; }
 
+/* ---- vertical flow (architecture path) -------------------- */
+.flow { display: flex; flex-direction: column; justify-content: center; gap: 0.35rem; }
+.flow .node { margin-bottom: 0; width: 100%; }
+.step {
+  text-align: center; font-family: var(--font-mono); font-size: 0.62rem;
+  color: var(--faint); line-height: 1; letter-spacing: 0.03em;
+}
+.step b { color: var(--psc); font-weight: 600; }
+.tag { font-family: var(--font-mono); font-size: 0.6rem; color: var(--psc);
+  border: 1px solid rgba(46,156,142,0.35); border-radius: 5px; padding: 0 0.35em; }
+
+/* big "?" gap for the problem slide */
+.gap { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.gap__q { font-family: var(--font-display); font-weight: 800; font-size: 2.6rem; color: var(--pain); line-height: 1; }
+.barrier { width: 100%; height: 0; border-top: 2px dashed var(--pain); opacity: 0.6; margin: 0.6rem 0; }
+
 /* ---- misc ------------------------------------------------- */
 .slidev-layout ul { line-height: 1.6; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }

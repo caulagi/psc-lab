@@ -38,20 +38,33 @@ publish/consume model.
 transition: fade-out
 ---
 
-<div class="flex items-stretch gap-12 h-full">
-  <div class="flex-1 flex flex-col justify-center">
-    <div class="kicker">The problem</div>
-    <h1 class="mt-4">Two VPCs.<br/>One private call.</h1>
-    <p class="lead mt-5 max-w-md">A client in one VPC needs a service in another — no public IP, different project, no shared routing.</p>
-    <div class="tag-row mt-6">
-      <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">Client</span></span>
-      <span class="arrow">→ ? →</span>
-      <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">Service</span></span>
+<div class="kicker">The problem</div>
+<h1 class="mt-3">Two VPCs. One private call.</h1>
+<p class="lead mt-2 mb-2 max-w-2xl">A client in one VPC needs a service in another — no public IP, different project, no shared routing.</p>
+
+<div class="diagram !mt-10">
+  <div class="vpc vpc--pain">
+    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Consumer VPC</span></div>
+    <div class="flex justify-center mt-5">
+      <div class="svc"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--lg" /><div class="svc__label">Client</div><div class="svc__meta">wants the service</div></div>
     </div>
-    <p v-click class="text-xl mt-8 dim">How do you connect them <strong>privately</strong>?</p>
   </div>
-  <div class="imgpanel" style="flex:1"><img src="./assets/gen/hero/section.png" /></div>
+
+  <div class="link gap">
+    <div class="gap__q">?</div>
+    <div class="barrier"></div>
+    <div class="link__cap">no public IP<br/>different project<br/>no route between them</div>
+  </div>
+
+  <div class="vpc vpc--pain">
+    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Producer VPC</span></div>
+    <div class="flex justify-center mt-5">
+      <div class="svc"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" /><div class="svc__label">Service</div><div class="svc__meta">private — by design</div></div>
+    </div>
+  </div>
 </div>
+
+<p v-click class="text-center text-xl mt-7 dim">How do you connect them <strong>privately</strong>?</p>
 
 ---
 transition: slide-left
@@ -250,7 +263,27 @@ transition: slide-left
       <div class="prob__sub">Google's fabric brokers endpoint ↔ attachment. One-way, no peering; the producer controls accept / reject.</div>
     </div>
   </div>
-  <div class="imgpanel" style="flex:0 0 32%"><img src="./assets/gen/variants/1-editorial.png" /></div>
+  <div class="flow" style="flex:0 0 31%">
+    <div class="node node--glow">
+      <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" />
+      <div><div class="node__name">Endpoint <span class="tag">01</span></div><div class="node__sub">consumer VPC</div></div>
+    </div>
+    <div class="step">↓ &nbsp;<b>04</b> brokered · one-way</div>
+    <div class="node node--attach">
+      <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" />
+      <div><div class="node__name">Service attachment <span class="tag">02</span></div></div>
+    </div>
+    <div class="step">↓</div>
+    <div class="node">
+      <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--sm" />
+      <div><div class="node__name">PSC NAT subnet <span class="tag">03</span></div><div class="node__sub">source-NAT</div></div>
+    </div>
+    <div class="step">↓</div>
+    <div class="node">
+      <img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--sm" />
+      <div><div class="node__name">Service</div></div>
+    </div>
+  </div>
 </div>
 
 ---
