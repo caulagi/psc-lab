@@ -380,8 +380,8 @@ layout: center
 class: text-center
 ---
 
-<div class="imground mx-auto mb-8" style="max-width:30rem"><img src="./assets/gen/hero/close.png" /></div>
+<div class="imground mx-auto mb-8" style="max-width:34rem"><img src="./assets/close.png" /></div>
 
-<div class="text-6xl font-extrabold" style="font-family: var(--font-display); letter-spacing:-.04em;">
+<div class="text-3xl font-extrabold" style="font-family: var(--font-display); letter-spacing:-.04em;">
   Let's build it <span class="grad-psc">in the lab</span> →
 </div>
