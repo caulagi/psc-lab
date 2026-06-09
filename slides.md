@@ -383,6 +383,39 @@ transition: fade-out
 <p class="mt-12"><strong>Who</strong> talks to <strong>whom</strong> is policy — not network plumbing.</p>
 
 ---
+transition: fade-out
+---
+
+<div class="h-full flex flex-col">
+
+<div class="kicker kicker--pain">Reality check</div>
+<h1 class="mt-2 !text-4xl">Is PSC a <span class="grad-pain">silver bullet</span>?</h1>
+<p class="dim mt-1 max-w-3xl">Not quite. Acceptance is <strong>project-level</strong> — you authorize a whole consumer project, not one workload.</p>
+
+<div class="flex-1 flex flex-col justify-center">
+
+<div class="flex gap-6 items-stretch">
+  <div class="prob flex-1">
+    <div class="prob__title !text-lg mb-3">What you'd love to write</div>
+    <div style="font-family:var(--font-mono);font-size:0.82rem;line-height:1.7;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0.7rem 0.9rem">accept from <strong>cart-service</strong><br/>in <strong>shop-prod</strong> — and nothing else</div>
+    <div class="mark mark--x mt-3">✕ not expressible</div>
+    <div class="prob__sub mt-1">per-service / per-identity acceptance isn't available</div>
+  </div>
+  <div class="prob flex-1">
+    <div class="prob__title !text-lg mb-3">What PSC actually allows</div>
+    <div style="font-family:var(--font-mono);font-size:0.82rem;line-height:1.7;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0.7rem 0.9rem">accept connections from<br/>project <strong>shop-prod</strong></div>
+    <div class="mark mark--ok mt-3">✓ project-level only</div>
+    <div class="prob__sub mt-1">any workload in that project can connect</div>
+  </div>
+</div>
+
+<p class="text-center text-lg mt-8">Want “only cart-service”? Enforce <em>caller identity</em> at the service — mTLS / IAM.</p>
+
+</div>
+
+</div>
+
+---
 layout: center
 class: text-center
 transition: fade-out
