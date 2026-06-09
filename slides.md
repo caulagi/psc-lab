@@ -114,9 +114,13 @@ transition: slide-left
 transition: slide-up
 ---
 
+<div class="h-full flex flex-col">
+
 <div class="kicker kicker--pain">The cost</div>
 <h1 class="mt-2 !text-4xl">Access becomes a <span class="grad-pain">network</span> problem</h1>
-<p class="dim mt-1 mb-7 max-w-3xl">Peering ties <em>who may talk to whom</em> to IP ranges and firewall rules — brittle and coupled.</p>
+<p class="dim mt-1 max-w-3xl">Peering ties <em>who may talk to whom</em> to IP ranges and firewall rules — brittle and coupled.</p>
+
+<div class="flex-1 flex flex-col justify-center">
 
 <div class="grid grid-cols-3 gap-5">
 
@@ -162,6 +166,10 @@ transition: slide-up
 </div>
 
 <p v-click="4" class="text-center text-2xl mt-9">Access is decided by <strong>IP address</strong> — <span class="grad-pain font-bold">not by <em>who</em> is calling.</span></p>
+
+</div>
+
+</div>
 
 ---
 layout: center
