@@ -36,7 +36,7 @@ transition: fade-out
 
 <div class="kicker">The problem</div>
 <h1 class="mt-3">Private things must reach private things</h1>
-<p class="lead mt-2 mb-7 max-w-2xl">A service rarely lives alone — and none of these should touch the public internet.</p>
+<p class="mt-2 mb-7 max-w-2xl">A service rarely lives alone — and none of these should touch the public internet.</p>
 
 <div class="grid grid-cols-3 gap-5">
   <div class="prob">
@@ -71,7 +71,7 @@ transition: fade-out
   </div>
 </div>
 
-<p v-click class="text-center text-xl mt-8 dim">Each needs a <strong>private path</strong> — without peering whole networks.</p>
+<p class="text-center text-xl mt-8 dim">Each needs a <strong>private path</strong> — without peering whole networks.</p>
 
 ---
 transition: slide-left
@@ -349,27 +349,27 @@ class: text-center
 transition: slide-up
 ---
 
-<div class="kicker justify-center">Takeaways</div>
+<h1 class="mt-3">Takeaways</h1>
 
 <div class="grid grid-cols-3 gap-5 mt-10 max-w-4xl">
-  <div v-click class="prob items-center text-center">
+  <div class="prob items-center text-center">
     <img src="./assets/gcp/identity_and_access_management.svg" class="gcp gcp--lg mx-auto" />
     <div class="prob__title mt-3">Authorize by identity</div>
     <div class="prob__sub">the producer accepts <em>who</em>, by project / IAM</div>
   </div>
-  <div v-click class="prob items-center text-center">
+  <div class="prob items-center text-center">
     <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--lg mx-auto" />
     <div class="prob__title mt-3">Network abstracted</div>
     <div class="prob__sub">no CIDRs, peering, or firewall rules</div>
   </div>
-  <div v-click class="prob items-center text-center">
+  <div class="prob items-center text-center">
     <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg mx-auto" />
     <div class="prob__title mt-3">Publish &amp; consume</div>
     <div class="prob__sub">a private endpoint you own</div>
   </div>
 </div>
 
-<p v-click class="lead mt-12"><strong>Who</strong> talks to <strong>whom</strong> is policy — not network plumbing.</p>
+<p class="mt-12"><strong>Who</strong> talks to <strong>whom</strong> is policy — not network plumbing.</p>
 
 ---
 layout: center
