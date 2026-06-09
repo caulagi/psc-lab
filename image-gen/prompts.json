@@ -1,0 +1,69 @@
+{
+  "model": "us.stability.stable-image-control-structure-v1:0",
+  "region": "us-east-1",
+  "width": 1280,
+  "height": 720,
+  "negatives": {
+    "editorial": "text, words, letters, watermark, logo, people, faces, dark background, neon, clutter, blurry, low quality, ugly",
+    "general": "text, words, letters, watermark, logo, people, faces, clutter, messy, blurry, low quality, jpeg artifacts, ugly"
+  },
+  "images": [
+    {
+      "name": "hero/title",
+      "control": "control-light",
+      "control_strength": 0.45,
+      "seed": 7,
+      "negative": "editorial",
+      "prompt": "Soft paper-cut editorial illustration of a cloud network, layered pastel clouds in coral peach sage-green and sky blue, tiny floating dots and fine threads, light cream background, gentle soft shadows, airy generous negative space, premium, calm, elegant"
+    },
+    {
+      "name": "hero/section",
+      "control": "control-light",
+      "control_strength": 0.42,
+      "seed": 23,
+      "negative": "editorial",
+      "prompt": "Minimal editorial paper-cut scene, two pastel cloud islands gently linked by a single thin thread, soft coral and teal, light cream background, lots of empty space, delicate, refined"
+    },
+    {
+      "name": "hero/close",
+      "control": "control-light",
+      "control_strength": 0.4,
+      "seed": 44,
+      "negative": "editorial",
+      "prompt": "Very minimal soft paper-cut illustration, a single small pastel cloud with a few gentle connecting lines and dots, light cream background, abundant negative space, serene, premium"
+    },
+
+    {
+      "name": "variants/1-editorial",
+      "control": "control-light",
+      "control_strength": 0.5,
+      "seed": 7,
+      "negative": "general",
+      "prompt": "Clean modern editorial illustration of cloud network infrastructure, soft pastel palette, bright off-white background, minimal flat shapes with subtle long shadows, generous negative space, premium SaaS marketing style, elegant, calm"
+    },
+    {
+      "name": "variants/2-blueprint",
+      "control": "control-dark",
+      "control_strength": 0.72,
+      "seed": 7,
+      "negative": "general",
+      "prompt": "Technical blueprint schematic of network infrastructure, luminous thin cyan lines on deep indigo draft paper, architectural drawing, grid, precise engineering diagram aesthetic, monochrome"
+    },
+    {
+      "name": "variants/3-iso-glass",
+      "control": "control-light",
+      "control_strength": 0.6,
+      "seed": 7,
+      "negative": "general",
+      "prompt": "Isometric 3D render of cloud infrastructure, glossy frosted glass and brushed chrome platforms, vibrant teal and violet gradient lighting, soft depth of field, cinematic studio render, premium, highly detailed"
+    },
+    {
+      "name": "variants/4-flat-geo",
+      "control": "control-light",
+      "control_strength": 0.55,
+      "seed": 7,
+      "negative": "general",
+      "prompt": "Bold flat vector illustration of a cloud network, confident geometric shapes, warm coral teal and indigo color blocks, crisp edges, modern tech editorial poster, dribbble style, clean"
+    }
+  ]
+}
