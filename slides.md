@@ -115,9 +115,10 @@ transition: slide-up
 ---
 
 <div class="kicker kicker--pain">The cost</div>
-<h1 class="mt-3">Why this hurts</h1>
+<h1 class="mt-3">Access becomes a <span class="grad-pain">network</span> problem</h1>
+<p class="dim mt-1 mb-4 max-w-3xl">Peering ties <em>who may talk to whom</em> to IP ranges and firewall rules — brittle and coupled.</p>
 
-<div class="grid grid-cols-3 gap-4 mt-7">
+<div class="grid grid-cols-3 gap-3">
 
   <div class="prob">
     <div class="prob__viz">
@@ -182,8 +183,8 @@ transition: slide-up
   </div>
 
   <div class="prob justify-center text-center" style="background:rgba(217,105,79,0.06);border-color:rgba(217,105,79,0.4)">
-    <div class="text-lg">You wanted <strong>one service</strong>.</div>
-    <div class="grad-pain text-2xl font-bold mt-1">You bought their<br/>whole network.</div>
+    <div class="text-lg">Access is decided by <strong>IP address</strong>—</div>
+    <div class="grad-pain text-2xl font-bold mt-1">not by <em>who</em><br/>is calling.</div>
   </div>
 
 </div>
@@ -196,11 +197,11 @@ transition: slide-left
 
 <div class="kicker justify-center">The shift</div>
 
-<img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg mx-auto mt-8" style="width:96px;height:96px" />
+<h1 class="!text-5xl mt-8">Make connectivity an <em>identity</em> question —<br/>not a <span class="grad-pain">network</span> one.</h1>
 
-<h1 class="!text-5xl mt-6">Consume a <em>service</em>,<br/>not a <span class="grad-pain">network</span>.</h1>
+<p class="lead mt-6">Authorize <strong>who</strong> may connect. Let the platform handle the wires.</p>
 
-<div v-click class="text-6xl font-extrabold grad-psc mt-8" style="font-family: var(--font-display); letter-spacing:-.04em;">
+<div v-click class="text-6xl font-extrabold grad-psc mt-10" style="font-family: var(--font-display); letter-spacing:-.04em;">
   Private Service Connect
 </div>
 
@@ -240,12 +241,46 @@ transition: slide-left
 <p class="text-center dim mt-7">The VPCs <strong>never merge</strong>. You call an IP you own.</p>
 
 ---
+transition: slide-up
+---
+
+<div class="kicker">The key idea</div>
+<h1 class="mt-3">Authorize by <span class="grad-psc">identity</span>. Forget the network.</h1>
+
+<div class="flex gap-6 items-stretch mt-5">
+  <div class="prob flex-1">
+    <div class="flex items-center gap-3">
+      <img src="./assets/gcp/identity_and_access_management.svg" class="gcp" />
+      <div class="prob__title !text-lg">Who may connect → a policy decision</div>
+    </div>
+    <div class="flow tight mt-3">
+      <div class="node node--glow"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">orders-svc</div><div class="node__sub">project: shop-prod</div></div><span class="mark mark--ok" style="margin-left:auto">✓ allow</span></div>
+      <div class="node"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">billing-svc</div><div class="node__sub">project: fin-prod</div></div><span class="mark mark--ok" style="margin-left:auto">✓ allow</span></div>
+      <div class="node" style="opacity:.6"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">unknown-svc</div><div class="node__sub">project: ???</div></div><span class="mark mark--x" style="margin-left:auto">✕ deny</span></div>
+    </div>
+    <div class="prob__sub mt-3">Producer accepts specific projects / identities — no IP ranges.</div>
+  </div>
+
+  <div class="prob flex-1">
+    <div class="prob__title !text-lg mb-3">The network → abstracted away</div>
+    <div class="flow tight" style="opacity:.5;filter:grayscale(.25)">
+      <div class="node"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><div><div class="node__name">VPCs &amp; peering</div></div><span class="mark mark--x" style="margin-left:auto">gone</span></div>
+      <div class="node"><img src="./assets/gcp/cloud_network.svg" class="gcp gcp--sm" /><div><div class="node__name">subnets &amp; CIDRs</div></div><span class="mark mark--x" style="margin-left:auto">gone</span></div>
+      <div class="node"><img src="./assets/gcp/cloud_firewall_rules.svg" class="gcp gcp--sm" /><div><div class="node__name">firewall rules</div></div><span class="mark mark--x" style="margin-left:auto">gone</span></div>
+    </div>
+    <div class="prob__sub mt-3">Addresses translated; routing is the platform's job.</div>
+  </div>
+</div>
+
+<p class="text-center text-lg mt-5"><strong>Who</strong> talks to <strong>whom</strong> is policy. <em>How</em> packets get there is the platform's job.</p>
+
+---
 transition: slide-left
 ---
 
 <div class="kicker">Architecture</div>
 <h1 class="mt-3">PSC: the key elements</h1>
-<p class="lead mt-2 mb-5">Connectivity features built into GCP's VPC — not your routing.</p>
+<p class="lead mt-2 mb-5">How PSC implements it — brokered connection, translated addresses, access by policy.</p>
 
 <div class="flex gap-8 items-stretch">
   <div class="grid grid-cols-2 gap-4 flex-1">
@@ -267,7 +302,7 @@ transition: slide-left
     <div class="prob">
       <div class="chip--ip chip self-start">04</div>
       <div class="prob__title mt-2">Connection brokering</div>
-      <div class="prob__sub">Google's fabric brokers endpoint ↔ attachment. One-way, no peering; the producer controls accept / reject.</div>
+      <div class="prob__sub">The producer accepts or rejects each consumer by project / identity — authorization, not firewall rules. One-way, no peering.</div>
     </div>
   </div>
   <div class="flow" style="flex:0 0 31%">
@@ -306,6 +341,7 @@ transition: fade
     <tr><th></th><th>VPC Peering</th><th>Private Service Connect</th></tr>
   </thead>
   <tbody>
+    <tr><td>Access control</td><td>IP ranges &amp; firewall rules</td><td>Accepted identity / policy</td></tr>
     <tr><td>Unit of connection</td><td>Whole network</td><td>A single service</td></tr>
     <tr><td>IP coordination</td><td>Required — no overlap</td><td>None — use your own IPs</td></tr>
     <tr><td>Routing exposed</td><td>Entire peered VPC</td><td>Just the endpoint</td></tr>
@@ -325,23 +361,23 @@ transition: slide-up
 
 <div class="grid grid-cols-3 gap-5 mt-10 max-w-4xl">
   <div v-click class="prob items-center text-center">
-    <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg mx-auto" />
-    <div class="prob__title mt-3">Publish / consume</div>
-    <div class="prob__sub">connectivity as a service</div>
+    <img src="./assets/gcp/identity_and_access_management.svg" class="gcp gcp--lg mx-auto" />
+    <div class="prob__title mt-3">Authorize by identity</div>
+    <div class="prob__sub">the producer accepts <em>who</em>, by project / IAM</div>
   </div>
   <div v-click class="prob items-center text-center">
     <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--lg mx-auto" />
-    <div class="prob__title mt-3">No shared CIDRs</div>
-    <div class="prob__sub">no mesh, no topology leak</div>
+    <div class="prob__title mt-3">Network abstracted</div>
+    <div class="prob__sub">no CIDRs, peering, or firewall rules</div>
   </div>
   <div v-click class="prob items-center text-center">
-    <img src="./assets/gcp/cloud_load_balancing.svg" class="gcp gcp--lg mx-auto" />
-    <div class="prob__title mt-3">Local endpoint</div>
-    <div class="prob__sub">an IP in your own VPC</div>
+    <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg mx-auto" />
+    <div class="prob__title mt-3">Publish &amp; consume</div>
+    <div class="prob__sub">a private endpoint you own</div>
   </div>
 </div>
 
-<p v-click class="lead mt-12">Coupled at the <em>service</em> layer — not the <strong>network</strong>.</p>
+<p v-click class="lead mt-12"><strong>Who</strong> talks to <strong>whom</strong> is policy — not network plumbing.</p>
 
 ---
 layout: center

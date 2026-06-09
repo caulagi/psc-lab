@@ -243,7 +243,7 @@
 
 /* ---- mini diagrams (slide 4) ------------------------------ */
 .prob { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1rem; display: flex; flex-direction: column; box-shadow: var(--shadow); }
-.prob__viz { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 96px; margin-bottom: 0.7rem; }
+.prob__viz { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 84px; margin-bottom: 0.6rem; }
 .prob__title { font-weight: 700; font-size: 0.98rem; }
 .prob__sub { color: var(--muted); font-size: 0.76rem; margin-top: 0.15rem; }
 
@@ -279,6 +279,8 @@
 /* ---- vertical flow (architecture path) -------------------- */
 .flow { display: flex; flex-direction: column; justify-content: center; gap: 0.35rem; }
 .flow .node { margin-bottom: 0; width: 100%; }
+.flow.tight { gap: 0.4rem; }
+.flow.tight .node { padding: 0.5rem 0.75rem; }
 .step {
   text-align: center; font-family: var(--font-mono); font-size: 0.62rem;
   color: var(--faint); line-height: 1; letter-spacing: 0.03em;
