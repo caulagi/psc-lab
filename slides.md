@@ -224,7 +224,7 @@ transition: fade-out
 <div class="kicker">In one line</div>
 <h1 class="mt-3">What is <span class="grad-psc">Private Service Connect</span>?</h1>
 
-<p class="lead mt-5 max-w-4xl">A consumer reaches a producer's service through a <strong>private endpoint in its own VPC</strong>. The producer <strong>publishes</strong> a service attachment and <strong>chooses which consumer projects may connect</strong> — no VPC peering, no shared address space, neither side's network exposed.</p>
+<p class="lead mt-5 max-w-4xl">A consumer reaches a producer's service through a <strong>private endpoint in its own VPC</strong>. The producer <strong>publishes</strong> a service attachment and <strong>chooses who may connect</strong> — no VPC peering, no shared address space, neither side's network exposed.</p>
 
 <div class="grid grid-cols-3 gap-5 mt-9">
   <div class="prob items-center text-center">
@@ -235,7 +235,7 @@ transition: fade-out
   <div class="prob items-center text-center">
     <img src="./assets/gcp/identity_and_access_management.svg" class="gcp gcp--lg" />
     <div class="prob__title mt-2">Authorize</div>
-    <div class="prob__sub">accept specific consumer projects</div>
+    <div class="prob__sub">the producer decides who connects</div>
   </div>
   <div class="prob items-center text-center">
     <img src="./assets/gcp/compute_engine.svg" class="gcp gcp--lg" />
@@ -243,8 +243,6 @@ transition: fade-out
     <div class="prob__sub">a private endpoint IP in your own VPC</div>
   </div>
 </div>
-
-<p class="dim text-center mt-7 text-sm">PSC controls <em>which</em> networks/projects may connect — per-caller identity (mTLS / IAM on the service) is layered on top.</p>
 
 ---
 transition: fade-out
@@ -260,11 +258,11 @@ transition: fade-out
       <div class="prob__title !text-lg">Who may connect → the producer's accept-list</div>
     </div>
     <div class="flow tight mt-3">
-      <div class="node node--glow"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">shop-prod</div><div class="node__sub">consumer project</div></div><span class="mark mark--ok" style="margin-left:auto">✓ accepted</span></div>
-      <div class="node"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">fin-prod</div><div class="node__sub">consumer project</div></div><span class="mark mark--ok" style="margin-left:auto">✓ accepted</span></div>
+      <div class="node node--glow"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">shop-prod</div><div class="node__sub">consumer</div></div><span class="mark mark--ok" style="margin-left:auto">✓ accepted</span></div>
+      <div class="node"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">fin-prod</div><div class="node__sub">consumer</div></div><span class="mark mark--ok" style="margin-left:auto">✓ accepted</span></div>
       <div class="node" style="opacity:.6"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">any other</div><div class="node__sub">not on the list</div></div><span class="mark mark--x" style="margin-left:auto">✕ rejected</span></div>
     </div>
-    <div class="prob__sub mt-3">The service attachment accepts specific consumer projects — a policy choice, not IP ranges.</div>
+    <div class="prob__sub mt-3">Authorized by policy — not by IP ranges or firewall rules.</div>
   </div>
 
   <div class="prob flex-1">
