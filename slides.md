@@ -34,9 +34,13 @@ publish/consume model.
 transition: fade-out
 ---
 
+<div class="h-full flex flex-col">
+
 <div class="kicker">The problem</div>
 <h1 class="mt-3">Private things must reach private things</h1>
-<p class="mt-2 mb-7 max-w-2xl">A service rarely lives alone — and none of these should touch the public internet.</p>
+<p class="mt-2 max-w-2xl">A service rarely lives alone — and none of these should touch the public internet.</p>
+
+<div class="flex-1 flex flex-col justify-center">
 
 <div class="grid grid-cols-3 gap-5">
   <div class="prob">
@@ -72,6 +76,10 @@ transition: fade-out
 </div>
 
 <p class="text-center text-xl mt-8 dim">Each needs a <strong>private path</strong> — without peering whole networks.</p>
+
+</div>
+
+</div>
 
 ---
 transition: fade-out
