@@ -115,8 +115,8 @@ transition: slide-up
 ---
 
 <div class="kicker kicker--pain">The cost</div>
-<h1 class="mt-3">Access becomes a <span class="grad-pain">network</span> problem</h1>
-<p class="dim mt-1 mb-4 max-w-3xl">Peering ties <em>who may talk to whom</em> to IP ranges and firewall rules — brittle and coupled.</p>
+<h1 class="mt-2 !text-4xl">Access becomes a <span class="grad-pain">network</span> problem</h1>
+<p class="dim mt-1 mb-3 max-w-3xl">Peering ties <em>who may talk to whom</em> to IP ranges and firewall rules — brittle and coupled.</p>
 
 <div class="grid grid-cols-3 gap-3">
 

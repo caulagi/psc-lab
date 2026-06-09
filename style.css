@@ -242,8 +242,8 @@
 .svc--pain { border-color: rgba(217, 105, 79, 0.4); }
 
 /* ---- mini diagrams (slide 4) ------------------------------ */
-.prob { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 1rem; display: flex; flex-direction: column; box-shadow: var(--shadow); }
-.prob__viz { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 84px; margin-bottom: 0.6rem; }
+.prob { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 0.8rem 0.9rem; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+.prob__viz { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 64px; margin-bottom: 0.5rem; }
 .prob__title { font-weight: 700; font-size: 0.98rem; }
 .prob__sub { color: var(--muted); font-size: 0.76rem; margin-top: 0.15rem; }
 
