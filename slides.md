@@ -195,15 +195,34 @@ class: text-center
 transition: slide-left
 ---
 
-<div class="kicker justify-center">The shift</div>
+<div class="kicker justify-center">Identity &amp; Access Management</div>
+<h1 class="!text-5xl mt-5">IAM answers one question:<br/><span class="grad-psc">who can do what?</span></h1>
 
-<h1 class="!text-5xl mt-8">Make connectivity an <em>identity</em> question —<br/>not a <span class="grad-pain">network</span> one.</h1>
-
-<p class="lead mt-6">Authorize <strong>who</strong> may connect. Let the platform handle the wires.</p>
-
-<div v-click class="text-6xl font-extrabold grad-psc mt-10" style="font-family: var(--font-display); letter-spacing:-.04em;">
-  Private Service Connect
+<div class="flex items-stretch justify-center gap-3 mt-9">
+  <div class="prob items-center text-center" style="width:235px">
+    <div style="height:72px;display:flex;align-items:center"><img src="./assets/gcp/identity_and_access_management.svg" class="gcp gcp--lg" /></div>
+    <div class="prob__title mt-1">Who</div>
+    <div class="prob__sub">a principal — user, group, or service identity</div>
+  </div>
+  <div class="flex items-center"><span class="arrow" style="font-size:1.6rem">→</span></div>
+  <div class="prob items-center text-center" style="width:235px">
+    <div style="height:72px;display:flex;align-items:center;gap:.4rem"><span class="chip--ip chip">connect</span><span class="chip--ip chip">read</span></div>
+    <div class="prob__title mt-1">can do what</div>
+    <div class="prob__sub">a role — the set of allowed actions</div>
+  </div>
+  <div class="flex items-center"><span class="arrow" style="font-size:1.6rem">→</span></div>
+  <div class="prob items-center text-center" style="width:235px">
+    <div style="height:72px;display:flex;align-items:center"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" /></div>
+    <div class="prob__title mt-1">on which resource</div>
+    <div class="prob__sub">a specific service, database, bucket…</div>
+  </div>
 </div>
+
+<div class="mt-7 inline-block chip" style="font-size:0.82rem;padding:0.5em 1.1em">
+  allow <strong>orders-svc@shop-prod</strong> &nbsp;to&nbsp; <strong>connect</strong> &nbsp;→&nbsp; <strong>payments-api</strong>
+</div>
+
+<p class="lead mt-5">Central, auditable, <em>identity-based</em> — no IP rules, no firewalls.</p>
 
 ---
 transition: slide-left
