@@ -19,7 +19,7 @@ fonts:
       <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" />
       <h1 class="!text-6xl !mb-0">Private <span class="grad-psc">Service Connect</span></h1>
     </div>
-    <div class="mt-10 text-2xl font-semibold" style="color:var(--ink)">Pradip Caulagi</div>
+    <div class="mt-10 text-2xl font-semibold" style="color:var(--ink)">Pradip Caulagi &amp; Pramod Kumar</div>
     <div class="mt-1 dim" style="font-family:var(--font-mono);font-size:0.95rem">10 June 2026</div>
   </div>
   <div class="imgpanel" style="flex:1"><img src="./assets/title.png" style="object-position:center top" /></div>
