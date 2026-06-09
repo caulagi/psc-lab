@@ -298,3 +298,7 @@
 .slidev-layout ul { line-height: 1.6; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .arrow { color: var(--faint); font-size: 1.1rem; }
+
+/* click reveals — newest card in focus, earlier ones recede */
+.slidev-vclick-target { transition: opacity .35s ease, transform .35s ease, filter .35s ease; }
+.dull { opacity: 0.3 !important; filter: grayscale(0.35); }

@@ -120,7 +120,7 @@ transition: slide-up
 
 <div class="grid grid-cols-3 gap-3">
 
-  <div class="prob">
+  <div class="prob" v-click="1" :class="{ dull: $clicks > 1 }">
     <div class="prob__viz">
       <div class="vmini"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp" /><span class="chip--pain chip">10.0.0.0/16</span></div>
       <div class="collide">⚡</div>
@@ -130,7 +130,7 @@ transition: slide-up
     <div class="prob__sub">coordinate IPs with every team, forever</div>
   </div>
 
-  <div class="prob">
+  <div class="prob" v-click="2" :class="{ dull: $clicks > 2 }">
     <div class="prob__viz stackrow !min-h-0">
       <div class="r"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="conn conn--ok"></span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="mark mark--ok">✓</span></div>
       <div class="r"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="conn conn--ok"></span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="mark mark--ok">✓</span></div>
@@ -140,7 +140,7 @@ transition: slide-up
     <div class="prob__sub">A↔B + B↔C ≠ A↔C — the mesh explodes</div>
   </div>
 
-  <div class="prob">
+  <div class="prob" v-click="3" :class="{ dull: $clicks > 3 }">
     <div class="prob__viz">
       <div class="fan">
         <span class="chip--pain chip">10.0/16</span>
@@ -155,7 +155,7 @@ transition: slide-up
     <div class="prob__sub">every consumer range, allow-listed</div>
   </div>
 
-  <div class="prob">
+  <div class="prob" v-click="4" :class="{ dull: $clicks > 4 }">
     <div class="prob__viz">
       <div class="exposed">
         <img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" />
@@ -169,7 +169,7 @@ transition: slide-up
     <div class="prob__sub">peering shares all routes — not one service</div>
   </div>
 
-  <div class="prob">
+  <div class="prob" v-click="5" :class="{ dull: $clicks > 5 }">
     <div class="prob__viz">
       <img src="./assets/gcp/compute_engine.svg" class="gcp" />
       <span class="conn conn--bad !w-8"></span>
@@ -182,7 +182,7 @@ transition: slide-up
     <div class="prob__sub">you must know their subnets &amp; IPs</div>
   </div>
 
-  <div class="prob justify-center text-center" style="background:rgba(217,105,79,0.06);border-color:rgba(217,105,79,0.4)">
+  <div class="prob justify-center text-center" v-click="6" style="background:rgba(217,105,79,0.06);border-color:rgba(217,105,79,0.4)">
     <div class="text-lg">Access is decided by <strong>IP address</strong>—</div>
     <div class="grad-pain text-2xl font-bold mt-1">not by <em>who</em><br/>is calling.</div>
   </div>
