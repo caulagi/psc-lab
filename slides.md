@@ -236,41 +236,6 @@ transition: slide-left
 <p class="dim text-center mt-7 text-sm">PSC controls <em>which</em> networks/projects may connect — per-caller identity (mTLS / IAM on the service) is layered on top.</p>
 
 ---
-transition: slide-left
----
-
-<div class="kicker">The PSC model</div>
-<h1 class="mt-3">Publish a service. Consume a <span class="grad-psc">local endpoint</span>.</h1>
-
-<div class="diagram !mt-10">
-  <div class="vpc vpc--consumer">
-    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Consumer VPC</span><span class="chip">any CIDR</span></div>
-    <div class="flex gap-3 justify-center mt-5">
-      <div class="svc !py-3"><img src="./assets/gcp/compute_engine.svg" class="gcp" /><div class="svc__meta">Client</div></div>
-      <div class="svc svc--glow !py-3"><img src="./assets/gcp/private_service_connect.svg" class="gcp" /><div class="svc__label !text-sm">Endpoint</div><div class="svc__meta">10.0.1.9</div></div>
-    </div>
-  </div>
-
-  <div class="link">
-    <div class="link__label grad-psc">PRIVATE</div>
-    <div class="wire wire--clean"></div>
-    <div class="link__cap">Google's fabric</div>
-  </div>
-
-  <div class="vpc vpc--producer opaque">
-    <div class="veil"></div>
-    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Producer VPC</span></div>
-    <div class="flex gap-3 justify-center mt-5 items-stretch">
-      <div class="svc !py-3 !min-w-0"><img src="./assets/gcp/private_service_connect.svg" class="gcp" /><div class="svc__meta">attachment</div></div>
-      <div class="svc !py-3 !min-w-0"><img src="./assets/gcp/cloud_load_balancing.svg" class="gcp" /><div class="svc__meta">ILB</div></div>
-      <div class="svc !py-3 !min-w-0"><img src="./assets/gcp/cloud_apis.svg" class="gcp" /><div class="svc__meta">service</div></div>
-    </div>
-  </div>
-</div>
-
-<p class="text-center dim mt-7">The VPCs <strong>never merge</strong>. You call an IP you own.</p>
-
----
 transition: slide-up
 ---
 
