@@ -348,29 +348,6 @@ transition: slide-left
 </div>
 
 ---
-layout: default
-transition: fade
----
-
-<div class="kicker">Head to head</div>
-<h1 class="mt-3">Side by side</h1>
-
-<table class="cmp mt-7">
-  <thead>
-    <tr><th></th><th>VPC Peering</th><th>Private Service Connect</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Access control</td><td>IP ranges &amp; firewall rules</td><td>Accepted identity / policy</td></tr>
-    <tr><td>Unit of connection</td><td>Whole network</td><td>A single service</td></tr>
-    <tr><td>IP coordination</td><td>Required — no overlap</td><td>None — use your own IPs</td></tr>
-    <tr><td>Routing exposed</td><td>Entire peered VPC</td><td>Just the endpoint</td></tr>
-    <tr><td>Transitive</td><td>No — mesh explodes</td><td>N/A — endpoints independent</td></tr>
-    <tr><td>Firewall rules</td><td>Per-consumer ranges</td><td>Local to the endpoint</td></tr>
-    <tr><td>Coupling</td><td>Tight — topology-aware</td><td>Loose — service-oriented</td></tr>
-  </tbody>
-</table>
-
----
 layout: center
 class: text-center
 transition: slide-up
