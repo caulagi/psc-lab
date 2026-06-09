@@ -302,3 +302,34 @@
 /* click reveals — newest card in focus, earlier ones recede */
 .slidev-vclick-target { transition: opacity .35s ease, transform .35s ease, filter .35s ease; }
 .dull { opacity: 0.3 !important; filter: grayscale(0.35); }
+
+/* ---- print / PDF export ----------------------------------- */
+@media print {
+  /* remove decorative full-slide overlays — mask-image is not reliably
+     supported in PDF renderers, so the raw grid would show as gray boxes */
+  .slidev-layout::before,
+  .slidev-layout::after { display: none; }
+
+  /* gradient text: background-clip:text can render as a coloured box in PDF
+     instead of clipping to glyphs — fall back to a solid colour */
+  .grad-psc {
+    background: none;
+    -webkit-text-fill-color: var(--psc);
+    color: var(--psc);
+  }
+  .grad-pain {
+    background: none;
+    -webkit-text-fill-color: var(--pain);
+    color: var(--pain);
+  }
+
+  /* table row hover highlight can be captured during PDF rendering */
+  .cmp tbody tr:hover td { background: transparent; }
+
+  /* freeze-free v-click elements */
+  .slidev-vclick-target { transition: none !important; }
+
+  /* backdrop-filter is unsupported in many PDF renderers; prevent the veil
+     from falling back to a solid grey overlay */
+  .opaque .veil { backdrop-filter: none; background: none; }
+}
