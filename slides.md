@@ -35,32 +35,43 @@ transition: fade-out
 ---
 
 <div class="kicker">The problem</div>
-<h1 class="mt-3">Two VPCs. One private call.</h1>
-<p class="lead mt-2 mb-2 max-w-2xl">A client in one VPC needs a service in another — no public IP, different project, no shared routing.</p>
+<h1 class="mt-3">Private things must reach private things</h1>
+<p class="lead mt-2 mb-7 max-w-2xl">A service rarely lives alone — and none of these should touch the public internet.</p>
 
-<div class="diagram !mt-10">
-  <div class="vpc vpc--pain">
-    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Consumer VPC</span></div>
-    <div class="flex justify-center mt-5">
-      <div class="svc"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--lg" /><div class="svc__label">Client</div><div class="svc__meta">wants the service</div></div>
+<div class="grid grid-cols-3 gap-5">
+  <div class="prob">
+    <div class="prob__viz">
+      <img src="./assets/gcp/cloud_apis.svg" class="gcp" />
+      <span class="conn conn--bad" style="width:16px"></span><span class="gap__q" style="font-size:1.3rem">?</span><span class="conn conn--bad" style="width:16px"></span>
+      <img src="./assets/gcp/compute_engine.svg" class="gcp" />
     </div>
+    <div class="prob__title">Service ↔ service</div>
+    <div class="prob__sub">two private services need to talk</div>
   </div>
 
-  <div class="link gap">
-    <div class="gap__q">?</div>
-    <div class="barrier"></div>
-    <div class="link__cap">no public IP<br/>different project<br/>no route between them</div>
+  <div class="prob">
+    <div class="prob__viz">
+      <img src="./assets/gcp/compute_engine.svg" class="gcp" />
+      <span class="conn conn--bad" style="width:16px"></span><span class="gap__q" style="font-size:1.3rem">?</span><span class="conn conn--bad" style="width:16px"></span>
+      <img src="./assets/gcp/cloud_sql.svg" class="gcp" />
+      <img src="./assets/gcp/memorystore.svg" class="gcp" />
+    </div>
+    <div class="prob__title">Service → database / cache</div>
+    <div class="prob__sub">the managed data it depends on</div>
   </div>
 
-  <div class="vpc vpc--pain">
-    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Producer VPC</span></div>
-    <div class="flex justify-center mt-5">
-      <div class="svc"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" /><div class="svc__label">Service</div><div class="svc__meta">private — by design</div></div>
+  <div class="prob">
+    <div class="prob__viz">
+      <img src="./assets/gcp/compute_engine.svg" class="gcp" />
+      <span class="conn conn--bad" style="width:16px"></span><span class="gap__q" style="font-size:1.3rem">?</span><span class="conn conn--bad" style="width:16px"></span>
+      <img src="./assets/gcp/cloud_interconnect.svg" class="gcp" />
     </div>
+    <div class="prob__title">Service → on-prem</div>
+    <div class="prob__sub">across the hybrid edge</div>
   </div>
 </div>
 
-<p v-click class="text-center text-xl mt-7 dim">How do you connect them <strong>privately</strong>?</p>
+<p v-click class="text-center text-xl mt-8 dim">Each needs a <strong>private path</strong> — without peering whole networks.</p>
 
 ---
 transition: slide-left
