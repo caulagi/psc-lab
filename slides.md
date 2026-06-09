@@ -37,8 +37,11 @@ transition: fade-out
 <div class="h-full flex flex-col">
 
 <div class="kicker">The problem</div>
-<h1 class="mt-3">Private things must reach private things</h1>
-<p class="mt-2 max-w-2xl">A service rarely lives alone — and none of these should touch the public internet.</p>
+<h1 class="mt-3">
+  “Loose lips sink ships”
+  <span style="text-align:right;font-style:italic;font-size:0.72rem;letter-spacing:0.02em;color:var(--pain);margin-top:0.15rem">— U.S. wartime security slogan, 1942</span>
+</h1>
+<p class="mt-3 max-w-2xl">Your production services talk constantly — those conversations shouldn't be exposed on the public internet.</p>
 
 <div class="flex-1 flex flex-col justify-center">
 
