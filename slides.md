@@ -1,110 +1,177 @@
 ---
 theme: seriph
 title: Private Service Connect in GCP
-info: |
-  ## Private Service Connect
-  From VPC plumbing to service-oriented connectivity.
-class: text-center
+info: From VPC plumbing to service-oriented connectivity.
+class: text-left
 transition: slide-left
 mdc: true
+fonts:
+  sans: Hanken Grotesk
+  display: Bricolage Grotesque
+  mono: JetBrains Mono
+  weights: '300,400,500,600,700,800'
 ---
 
-# Private Service Connect
+<div class="kicker">GCP Networking · PSC Lab</div>
 
-### Connecting to private services in GCP — without the VPC plumbing
+<div class="flex items-center gap-5 mt-8">
+  <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" />
+  <h1 class="!text-7xl !mb-0">Private <span class="grad-psc">Service Connect</span></h1>
+</div>
 
-<div class="abs-br m-6 text-sm opacity-60">
-  GCP Networking · PSC Lab
+<p class="lead mt-5 max-w-xl">Reach a private service across VPCs — without the network plumbing.</p>
+
+<div class="tag-row mt-10 items-center">
+  <span class="svc !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">VPC peering</span></span>
+  <span class="arrow">→</span>
+  <span class="svc svc--glow !flex-row !py-2 !px-3 !min-w-0"><img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" /> <span class="svc__label !text-sm">service-oriented</span></span>
 </div>
 
 <!--
-Speaker note: We'll start with the problem — how do you reach a private service
-today — walk through the traditional VPC-peering setup, then show how PSC turns
-this into a service-oriented model.
+The problem, then the traditional peering setup and its costs, then PSC as a
+publish/consume model.
 -->
 
 ---
 transition: fade-out
 ---
 
-# The problem
+<div class="kicker">The problem</div>
+<h1 class="mt-5">Two VPCs. One private call.</h1>
 
-You have a **service** running in one VPC.<br>
-You have a **client** running in another VPC.
+<div class="flex items-center justify-center gap-10 mt-16">
+  <div class="svc svc--pain">
+    <img src="./assets/gcp/compute_engine.svg" class="gcp gcp--lg" />
+    <div class="svc__label">Client</div>
+    <div class="svc__meta">Consumer VPC</div>
+  </div>
 
-<v-clicks>
+  <div class="text-center">
+    <div class="text-6xl faint leading-none">?</div>
+    <div class="svc__meta mt-3">no public IP<br/>different project</div>
+  </div>
 
-- Different teams. Different projects. Maybe different orgs.
-- The service has **no public IP** — and shouldn't.
-- The client just wants to call `https://service/...` privately.
-
-</v-clicks>
-
-<div v-click class="mt-8 text-xl">
-
-So… how do you connect them?
-
+  <div class="svc svc--pain">
+    <img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" />
+    <div class="svc__label">Service</div>
+    <div class="svc__meta">Producer VPC</div>
+  </div>
 </div>
 
-<!--
-The naive answer is "peer the VPCs". Let's see what that actually costs.
--->
+<p v-click class="text-center text-xl mt-14 dim">How do you connect them <strong>privately</strong>?</p>
 
 ---
-layout: default
 transition: slide-left
 ---
 
-# Traditional setup: VPC Peering
+<div class="kicker kicker--pain">The traditional answer</div>
+<h1 class="mt-4">Stitch the networks with <span class="grad-pain">VPC peering</span></h1>
 
-The two VPCs are stitched together at the network layer.
+<div class="diagram !mt-12">
+  <div class="vpc vpc--pain">
+    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Consumer VPC</span><span class="chip--pain chip">10.0.0.0/16</span></div>
+    <div class="flex gap-3 justify-center mt-4">
+      <div class="svc !py-3"><img src="./assets/gcp/compute_engine.svg" class="gcp" /><div class="svc__meta">10.0.1.5</div></div>
+      <div class="svc !py-3"><img src="./assets/gcp/cloud_network.svg" class="gcp" /><div class="svc__meta">subnet</div></div>
+    </div>
+    <div class="flex justify-center mt-4"><span class="fw"><img src="./assets/gcp/cloud_firewall_rules.svg" class="gcp gcp--sm" /> allow → 10.50/16</span></div>
+  </div>
 
-```mermaid {scale: 0.62}
-flowchart LR
-  subgraph CONSUMER["Consumer VPC  (10.0.0.0/16)"]
-    direction TB
-    CSub["Subnet<br/>10.0.1.0/24"]
-    Client["Client VM<br/>10.0.1.5"]
-    CFW["Firewall rules<br/>allow → 10.50.0.0/16"]
-    Client --- CSub
-  end
+  <div class="link">
+    <div class="link__label grad-pain">PEERING</div>
+    <div class="wire wire--pain wire--stack"></div>
+    <div class="wire wire--pain wire--stack"></div>
+    <div class="wire wire--pain wire--stack"></div>
+    <div class="link__cap">routes exchanged</div>
+  </div>
 
-  subgraph PRODUCER["Producer VPC  (10.50.0.0/16)"]
-    direction TB
-    PSub["Subnet<br/>10.50.1.0/24"]
-    Svc["Service<br/>10.50.1.20"]
-    PFW["Firewall rules<br/>allow ← 10.0.0.0/16"]
-    Svc --- PSub
-  end
-
-  CONSUMER <== "VPC Peering<br/>(routes exchanged)" ==> PRODUCER
-```
-
-<div class="text-sm opacity-70 mt-2">
-
-Both networks now share routing scope. You're coupling **networks**, not consuming a **service**.
-
+  <div class="vpc vpc--pain">
+    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Producer VPC</span><span class="chip--pain chip">10.50.0.0/16</span></div>
+    <div class="flex gap-3 justify-center mt-4">
+      <div class="svc !py-3"><img src="./assets/gcp/cloud_apis.svg" class="gcp" /><div class="svc__meta">10.50.1.20</div></div>
+      <div class="svc !py-3"><img src="./assets/gcp/cloud_network.svg" class="gcp" /><div class="svc__meta">subnet</div></div>
+    </div>
+    <div class="flex justify-center mt-4"><span class="fw"><img src="./assets/gcp/cloud_firewall_rules.svg" class="gcp gcp--sm" /> allow ← 10.0/16</span></div>
+  </div>
 </div>
+
+<p class="text-center dim mt-7">Coupling <strong>networks</strong> — not consuming a <em>service</em>.</p>
 
 ---
 transition: slide-up
 ---
 
-# Why this hurts
+<div class="kicker kicker--pain">The cost</div>
+<h1 class="mt-3">Why this hurts</h1>
 
-<v-clicks>
+<div class="grid grid-cols-3 gap-4 mt-7">
 
-- 🔢 **IP coordination** — CIDR ranges must not overlap. Forever. Across every team you peer with.
-- 🔗 **No transitive peering** — A↔B and B↔C does *not* give you A↔C. The mesh explodes.
-- 🧱 **Firewall sprawl** — every consumer needs rules; every producer must allow each consumer range.
-- 👀 **Over-exposure** — peering exposes the *whole* VPC's routes, not just the one service.
-- ⛓️ **Tight coupling** — the consumer must know the producer's subnets, IPs, and topology.
+  <div class="prob">
+    <div class="prob__viz">
+      <div class="vmini"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp" /><span class="chip--pain chip">10.0.0.0/16</span></div>
+      <div class="collide">⚡</div>
+      <div class="vmini"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp" /><span class="chip--pain chip">10.0.0.0/16</span></div>
+    </div>
+    <div class="prob__title">CIDRs can't overlap</div>
+    <div class="prob__sub">coordinate IPs with every team, forever</div>
+  </div>
 
-</v-clicks>
+  <div class="prob">
+    <div class="prob__viz stackrow !min-h-0">
+      <div class="r"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="conn conn--ok"></span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="mark mark--ok">✓</span></div>
+      <div class="r"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="conn conn--ok"></span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="mark mark--ok">✓</span></div>
+      <div class="r"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="conn conn--bad"></span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><span class="mark mark--x">✕</span></div>
+    </div>
+    <div class="prob__title">Peering isn't transitive</div>
+    <div class="prob__sub">A↔B + B↔C ≠ A↔C — the mesh explodes</div>
+  </div>
 
-<div v-click class="mt-6 text-xl">
+  <div class="prob">
+    <div class="prob__viz">
+      <div class="fan">
+        <span class="chip--pain chip">10.0/16</span>
+        <span class="chip--pain chip">10.2/16</span>
+        <span class="chip--pain chip">10.4/16</span>
+        <span class="faint text-xs">+14 more…</span>
+      </div>
+      <span class="arrow">→</span>
+      <img src="./assets/gcp/cloud_firewall_rules.svg" class="gcp gcp--lg" />
+    </div>
+    <div class="prob__title">Firewall rules pile up</div>
+    <div class="prob__sub">every consumer range, allow-listed</div>
+  </div>
 
-You wanted to call **one service**. You bought into **someone else's entire network**.
+  <div class="prob">
+    <div class="prob__viz">
+      <div class="exposed">
+        <img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" />
+        <img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" />
+        <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--sm" />
+        <img src="./assets/gcp/cloud_load_balancing.svg" class="gcp gcp--sm" />
+        <span class="mark mark--x text-lg">👁</span>
+      </div>
+    </div>
+    <div class="prob__title">The whole VPC is exposed</div>
+    <div class="prob__sub">peering shares all routes — not one service</div>
+  </div>
+
+  <div class="prob">
+    <div class="prob__viz">
+      <img src="./assets/gcp/compute_engine.svg" class="gcp" />
+      <span class="conn conn--bad !w-8"></span>
+      <div class="exposed !border-amber-400/60">
+        <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--sm" />
+        <img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--sm" />
+      </div>
+    </div>
+    <div class="prob__title">Coupled to their topology</div>
+    <div class="prob__sub">you must know their subnets &amp; IPs</div>
+  </div>
+
+  <div class="prob !bg-transparent !border-rose-400/30 justify-center text-center">
+    <div class="text-lg">You wanted <strong>one service</strong>.</div>
+    <div class="grad-pain text-2xl font-bold mt-1">You bought their<br/>whole network.</div>
+  </div>
 
 </div>
 
@@ -114,124 +181,72 @@ class: text-center
 transition: slide-left
 ---
 
-# What if you could just consume a *service*?
+<div class="kicker justify-center">The shift</div>
 
-<div class="text-2xl opacity-70 mt-4">
+<img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg mx-auto mt-8" style="width:96px;height:96px" />
 
-No peering. No shared CIDRs. No knowledge of the other VPC.
+<h1 class="!text-5xl mt-6">Consume a <em>service</em>,<br/>not a <span class="grad-pain">network</span>.</h1>
 
-</div>
-
-<div v-click class="text-3xl mt-10 font-bold text-teal-400">
-
-Private Service Connect
-
+<div v-click class="text-6xl font-extrabold grad-psc mt-8" style="font-family: var(--font-display); letter-spacing:-.04em;">
+  Private Service Connect
 </div>
 
 ---
 transition: slide-left
 ---
 
-# PSC: service-oriented connectivity
+<div class="kicker">The PSC model</div>
+<h1 class="mt-3">Publish a service. Consume a <span class="grad-psc">local endpoint</span>.</h1>
 
-The producer publishes a **Service Attachment**. The consumer creates an **Endpoint** — an IP *in its own VPC*.
+<div class="diagram !mt-10">
+  <div class="vpc vpc--consumer">
+    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Consumer VPC</span><span class="chip">any CIDR</span></div>
+    <div class="flex gap-3 justify-center mt-5">
+      <div class="svc !py-3"><img src="./assets/gcp/compute_engine.svg" class="gcp" /><div class="svc__meta">Client</div></div>
+      <div class="svc svc--glow !py-3"><img src="./assets/gcp/private_service_connect.svg" class="gcp" /><div class="svc__label !text-sm">Endpoint</div><div class="svc__meta">10.0.1.9</div></div>
+    </div>
+  </div>
 
-```mermaid {scale: 0.6}
-flowchart LR
-  subgraph CONSUMER["Consumer VPC  (any CIDR — no coordination)"]
-    direction TB
-    Client["Client VM"]
-    EP["PSC Endpoint<br/>10.0.1.9<br/>(local IP)"]
-    Client --> EP
-  end
+  <div class="link">
+    <div class="link__label grad-psc">PRIVATE</div>
+    <div class="wire wire--clean"></div>
+    <div class="link__cap">Google's fabric</div>
+  </div>
 
-  EP -. "private, one-way<br/>connection" .-> SA
-
-  subgraph PRODUCER["Producer VPC  (opaque to consumer)"]
-    direction TB
-    SA["Service Attachment"]
-    ILB["Internal Load Balancer"]
-    Svc["Service"]
-    SA --> ILB --> Svc
-  end
-
-  style EP fill:#0d9488,color:#fff
-  style SA fill:#0d9488,color:#fff
-```
-
-<div class="text-sm opacity-70 mt-2">
-
-The consumer talks to a **local IP**. GCP's fabric carries the traffic. The two VPCs never merge.
-
+  <div class="vpc vpc--producer opaque">
+    <div class="veil"></div>
+    <div class="vpc__title"><span><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm inline" /> Producer VPC</span></div>
+    <div class="flex gap-3 justify-center mt-5 items-stretch">
+      <div class="svc !py-3 !min-w-0"><img src="./assets/gcp/private_service_connect.svg" class="gcp" /><div class="svc__meta">attachment</div></div>
+      <div class="svc !py-3 !min-w-0"><img src="./assets/gcp/cloud_load_balancing.svg" class="gcp" /><div class="svc__meta">ILB</div></div>
+      <div class="svc !py-3 !min-w-0"><img src="./assets/gcp/cloud_apis.svg" class="gcp" /><div class="svc__meta">service</div></div>
+    </div>
+  </div>
 </div>
 
----
-transition: slide-up
----
-
-# What PSC abstracts away
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-### Gone ✅
-
-<v-clicks>
-
-- Shared / non-overlapping CIDR ranges
-- VPC peering & route exchange
-- Cross-VPC firewall coordination
-- Knowing the producer's topology
-- Transitive-peering workarounds
-
-</v-clicks>
-
-</div>
-
-<div>
-
-### What you deal with instead
-
-<v-clicks>
-
-- A **service attachment** (producer side)
-- An **endpoint IP** in your own VPC
-- Connection accept/reject by the producer
-- That's basically it
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<div v-click class="mt-6 text-center text-xl">
-
-The unit of connectivity is now a **service**, not a **network**.
-
-</div>
+<p class="text-center dim mt-7">The VPCs <strong>never merge</strong>. You call an IP you own.</p>
 
 ---
 layout: default
 transition: fade
 ---
 
-# Side by side
+<div class="kicker">Head to head</div>
+<h1 class="mt-3">Side by side</h1>
 
-<div class="text-sm">
-
-| | VPC Peering | Private Service Connect |
-|---|---|---|
-| **Unit of connection** | Whole network | A single service |
-| **IP coordination** | Required (no overlap) | None — consumer uses its own IPs |
-| **Routing scope exposed** | Entire peered VPC | Just the endpoint |
-| **Transitive** | No (mesh explodes) | N/A — each endpoint is independent |
-| **Firewall rules** | Per-consumer ranges | Local to the endpoint |
-| **Coupling** | Tight (topology-aware) | Loose (service-oriented) |
-| **Who initiates** | Symmetric | Consumer → producer, one-way |
-
-</div>
+<table class="cmp mt-7">
+  <thead>
+    <tr><th></th><th>VPC Peering</th><th>Private Service Connect</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Unit of connection</td><td>Whole network</td><td>A single service</td></tr>
+    <tr><td>IP coordination</td><td>Required — no overlap</td><td>None — use your own IPs</td></tr>
+    <tr><td>Routing exposed</td><td>Entire peered VPC</td><td>Just the endpoint</td></tr>
+    <tr><td>Transitive</td><td>No — mesh explodes</td><td>N/A — endpoints independent</td></tr>
+    <tr><td>Firewall rules</td><td>Per-consumer ranges</td><td>Local to the endpoint</td></tr>
+    <tr><td>Coupling</td><td>Tight — topology-aware</td><td>Loose — service-oriented</td></tr>
+  </tbody>
+</table>
 
 ---
 layout: center
@@ -239,29 +254,37 @@ class: text-center
 transition: slide-up
 ---
 
-# Takeaways
+<div class="kicker justify-center">Takeaways</div>
 
-<v-clicks>
+<div class="grid grid-cols-3 gap-5 mt-10 max-w-4xl">
+  <div v-click class="prob items-center text-center">
+    <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg mx-auto" />
+    <div class="prob__title mt-3">Publish / consume</div>
+    <div class="prob__sub">connectivity as a service</div>
+  </div>
+  <div v-click class="prob items-center text-center">
+    <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--lg mx-auto" />
+    <div class="prob__title mt-3">No shared CIDRs</div>
+    <div class="prob__sub">no mesh, no topology leak</div>
+  </div>
+  <div v-click class="prob items-center text-center">
+    <img src="./assets/gcp/cloud_load_balancing.svg" class="gcp gcp--lg mx-auto" />
+    <div class="prob__title mt-3">Local endpoint</div>
+    <div class="prob__sub">an IP in your own VPC</div>
+  </div>
+</div>
 
-<div class="text-xl">🔌 PSC turns private connectivity into a <b>publish / consume</b> model.</div>
-
-<div class="text-xl">🧭 No shared CIDRs, no peering mesh, no topology leakage.</div>
-
-<div class="text-xl">🏷️ Producers expose a <b>service attachment</b>; consumers get a <b>local endpoint</b>.</div>
-
-<div class="text-xl mt-6 opacity-80">Same goal — reach a private service — but coupled at the <b>service</b> layer, not the <b>network</b> layer.</div>
-
-</v-clicks>
+<p v-click class="lead mt-12">Coupled at the <em>service</em> layer — not the <strong>network</strong>.</p>
 
 ---
 layout: center
 class: text-center
 ---
 
-# Thanks
+<img src="./assets/gcp/private_service_connect.svg" class="gcp mx-auto" style="width:84px;height:84px" />
 
-Let's build it in the lab →
-
-<div class="abs-br m-6 text-sm opacity-60">
-  psc-lab
+<div class="text-6xl font-extrabold mt-6" style="font-family: var(--font-display); letter-spacing:-.04em;">
+  Let's build it <span class="grad-psc">in the lab</span> →
 </div>
+
+<div class="abs-br m-6 chip">psc-lab</div>
