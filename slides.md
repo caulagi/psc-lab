@@ -206,7 +206,7 @@ transition: slide-left
   </div>
   <div class="flex items-center"><span class="arrow" style="font-size:1.6rem">→</span></div>
   <div class="prob items-center text-center" style="width:235px">
-    <div style="height:72px;display:flex;align-items:center;gap:.4rem"><span class="chip--ip chip">connect</span><span class="chip--ip chip">read</span></div>
+    <div style="height:72px;display:flex;align-items:center;gap:.4rem"><span class="chip--ip chip">invoke</span><span class="chip--ip chip">read</span></div>
     <div class="prob__title mt-1">can do what</div>
     <div class="prob__sub">a role — the set of allowed actions</div>
   </div>
@@ -219,10 +219,39 @@ transition: slide-left
 </div>
 
 <div class="mt-7 inline-block chip" style="font-size:0.82rem;padding:0.5em 1.1em">
-  allow <strong>orders-svc@shop-prod</strong> &nbsp;to&nbsp; <strong>connect</strong> &nbsp;→&nbsp; <strong>payments-api</strong>
+  allow <strong>analytics-sa@data-prod</strong> &nbsp;to&nbsp; <strong>invoke</strong> &nbsp;→&nbsp; <strong>reports-api</strong>
 </div>
 
 <p class="lead mt-5">Central, auditable, <em>identity-based</em> — no IP rules, no firewalls.</p>
+
+---
+transition: slide-left
+---
+
+<div class="kicker">In one line</div>
+<h1 class="mt-3">What is <span class="grad-psc">Private Service Connect</span>?</h1>
+
+<p class="lead mt-5 max-w-4xl">A consumer reaches a producer's service through a <strong>private endpoint in its own VPC</strong>. The producer <strong>publishes</strong> a service attachment and <strong>chooses which consumer projects may connect</strong> — no VPC peering, no shared address space, neither side's network exposed.</p>
+
+<div class="grid grid-cols-3 gap-5 mt-9">
+  <div class="prob items-center text-center">
+    <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" />
+    <div class="prob__title mt-2">Publish</div>
+    <div class="prob__sub">producer exposes a service attachment</div>
+  </div>
+  <div class="prob items-center text-center">
+    <img src="./assets/gcp/identity_and_access_management.svg" class="gcp gcp--lg" />
+    <div class="prob__title mt-2">Authorize</div>
+    <div class="prob__sub">accept specific consumer projects</div>
+  </div>
+  <div class="prob items-center text-center">
+    <img src="./assets/gcp/compute_engine.svg" class="gcp gcp--lg" />
+    <div class="prob__title mt-2">Consume</div>
+    <div class="prob__sub">a private endpoint IP in your own VPC</div>
+  </div>
+</div>
+
+<p class="dim text-center mt-7 text-sm">PSC controls <em>which</em> networks/projects may connect — per-caller identity (mTLS / IAM on the service) is layered on top.</p>
 
 ---
 transition: slide-left
@@ -264,34 +293,34 @@ transition: slide-up
 ---
 
 <div class="kicker">The key idea</div>
-<h1 class="mt-2 !text-4xl">Authorize by <span class="grad-psc">identity</span>. Forget the network.</h1>
+<h1 class="mt-2 !text-4xl">Authorize by <span class="grad-psc">policy</span>. Hide the network.</h1>
 
 <div class="flex gap-6 items-stretch mt-4">
   <div class="prob flex-1">
     <div class="flex items-center gap-3">
       <img src="./assets/gcp/identity_and_access_management.svg" class="gcp" />
-      <div class="prob__title !text-lg">Who may connect → a policy decision</div>
+      <div class="prob__title !text-lg">Who may connect → the producer's accept-list</div>
     </div>
     <div class="flow tight mt-3">
-      <div class="node node--glow"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">orders-svc</div><div class="node__sub">project: shop-prod</div></div><span class="mark mark--ok" style="margin-left:auto">✓ allow</span></div>
-      <div class="node"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">billing-svc</div><div class="node__sub">project: fin-prod</div></div><span class="mark mark--ok" style="margin-left:auto">✓ allow</span></div>
-      <div class="node" style="opacity:.6"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">unknown-svc</div><div class="node__sub">project: ???</div></div><span class="mark mark--x" style="margin-left:auto">✕ deny</span></div>
+      <div class="node node--glow"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">shop-prod</div><div class="node__sub">consumer project</div></div><span class="mark mark--ok" style="margin-left:auto">✓ accepted</span></div>
+      <div class="node"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">fin-prod</div><div class="node__sub">consumer project</div></div><span class="mark mark--ok" style="margin-left:auto">✓ accepted</span></div>
+      <div class="node" style="opacity:.6"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--sm" /><div><div class="node__name">any other</div><div class="node__sub">not on the list</div></div><span class="mark mark--x" style="margin-left:auto">✕ rejected</span></div>
     </div>
-    <div class="prob__sub mt-3">Producer accepts specific projects / identities — no IP ranges.</div>
+    <div class="prob__sub mt-3">The service attachment accepts specific consumer projects — a policy choice, not IP ranges.</div>
   </div>
 
   <div class="prob flex-1">
-    <div class="prob__title !text-lg mb-3">The network → abstracted away</div>
-    <div class="flow tight" style="opacity:.5;filter:grayscale(.25)">
-      <div class="node"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><div><div class="node__name">VPCs &amp; peering</div></div><span class="mark mark--x" style="margin-left:auto">gone</span></div>
-      <div class="node"><img src="./assets/gcp/cloud_network.svg" class="gcp gcp--sm" /><div><div class="node__name">subnets &amp; CIDRs</div></div><span class="mark mark--x" style="margin-left:auto">gone</span></div>
-      <div class="node"><img src="./assets/gcp/cloud_firewall_rules.svg" class="gcp gcp--sm" /><div><div class="node__name">firewall rules</div></div><span class="mark mark--x" style="margin-left:auto">gone</span></div>
+    <div class="prob__title !text-lg mb-3">The producer's network → hidden</div>
+    <div class="flow tight" style="opacity:.55;filter:grayscale(.25)">
+      <div class="node"><img src="./assets/gcp/virtual_private_cloud.svg" class="gcp gcp--sm" /><div><div class="node__name">VPC peering</div></div><span class="mark mark--x" style="margin-left:auto">not needed</span></div>
+      <div class="node"><img src="./assets/gcp/cloud_network.svg" class="gcp gcp--sm" /><div><div class="node__name">overlapping CIDRs</div></div><span class="mark mark--x" style="margin-left:auto">gone</span></div>
+      <div class="node"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--sm" /><div><div class="node__name">their subnets &amp; routes</div></div><span class="mark mark--x" style="margin-left:auto">invisible</span></div>
     </div>
-    <div class="prob__sub mt-3">Addresses translated; routing is the platform's job.</div>
+    <div class="prob__sub mt-3">Addresses are translated; you never see the other side's topology.</div>
   </div>
 </div>
 
-<p class="text-center text-lg mt-3"><strong>Who</strong> talks to <strong>whom</strong> is policy. <em>How</em> packets get there is the platform's job.</p>
+<p class="text-center text-lg mt-3"><strong>Which</strong> consumers may connect is policy — the producer's network stays <em>hidden</em>.</p>
 
 ---
 transition: slide-left
@@ -346,6 +375,26 @@ transition: slide-left
     </div>
   </div>
 </div>
+
+---
+transition: slide-left
+---
+
+<div class="kicker">Calling it</div>
+<h1 class="mt-3">Reach it by <span class="grad-psc">name</span>, not IP</h1>
+<p class="lead mt-2 max-w-3xl">The endpoint is just a private IP — front it with DNS so callers use a stable hostname.</p>
+
+<div class="flex items-center justify-center gap-4 mt-14">
+  <div class="svc"><img src="./assets/gcp/compute_engine.svg" class="gcp gcp--lg" /><div class="svc__label">Client</div><div class="svc__meta">“payments.internal”</div></div>
+  <span class="arrow" style="font-size:1.5rem">→</span>
+  <div class="svc"><img src="./assets/gcp/cloud_dns.svg" class="gcp gcp--lg" /><div class="svc__label">Private DNS</div><div class="svc__meta">name → 10.0.1.9</div></div>
+  <span class="arrow" style="font-size:1.5rem">→</span>
+  <div class="svc svc--glow"><img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg" /><div class="svc__label">PSC endpoint</div><div class="svc__meta">10.0.1.9</div></div>
+  <span class="arrow" style="font-size:1.5rem">→</span>
+  <div class="svc"><img src="./assets/gcp/cloud_apis.svg" class="gcp gcp--lg" /><div class="svc__label">Service</div></div>
+</div>
+
+<p class="text-center dim mt-14">A Cloud DNS private zone (or Service Directory) maps the name to the endpoint — callers never hardcode an address.</p>
 
 ---
 layout: center
