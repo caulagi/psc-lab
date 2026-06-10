@@ -272,7 +272,7 @@ transition: fade-out
   </div>
 </div>
 
-<p class="text-center text-lg mt-3">Two things, named: <span class="grad-psc font-bold">connection-plane access control</span> + <span class="grad-psc font-bold">network decoupling</span>.</p>
+<p class="text-center text-lg mt-3"><span class="grad-psc font-bold">connection-plane access control</span> + <span class="grad-psc font-bold">network decoupling</span>.</p>
 
 ---
 transition: fade-out
