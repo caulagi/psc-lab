@@ -306,12 +306,12 @@ transition: fade-out
     </div>
   </div>
   <div class="flow" style="flex:0 0 31%">
-    <div class="node node--glow">
+    <div class="node">
       <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" />
       <div><div class="node__name">Endpoint <span class="tag">01</span></div><div class="node__sub">consumer VPC</div></div>
     </div>
-    <div class="step">↓ &nbsp;<b>04</b> brokered · one-way</div>
-    <div class="node node--attach">
+    <div class="step">↓</div>
+    <div class="node">
       <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--sm" />
       <div><div class="node__name">Service attachment <span class="tag">02</span></div></div>
     </div>
