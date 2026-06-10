@@ -211,10 +211,6 @@ transition: fade-out
   </div>
 </div>
 
-<div class="mt-7 inline-block chip" style="font-size:0.82rem;padding:0.5em 1.1em">
-  allow <strong>analytics-sa@data-prod</strong> &nbsp;to&nbsp; <strong>invoke</strong> &nbsp;→&nbsp; <strong>reports-api</strong>
-</div>
-
 <p class="lead mt-5">Central, auditable, <em>identity-based</em> — no IP rules, no firewalls.</p>
 
 ---
