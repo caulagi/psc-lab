@@ -272,7 +272,7 @@ transition: fade-out
   </div>
 </div>
 
-<p class="text-center text-lg mt-3"><strong>Which</strong> consumers may connect is policy — the producer's network stays <em>hidden</em>.</p>
+<p class="text-center text-lg mt-3">Two things, named: <span class="grad-psc font-bold">connection-plane access control</span> + <span class="grad-psc font-bold">network decoupling</span>.</p>
 
 ---
 transition: fade-out
@@ -359,13 +359,13 @@ transition: fade-out
 <div class="grid grid-cols-3 gap-5 mt-10 max-w-4xl">
   <div class="prob items-center text-center">
     <img src="./assets/gcp/identity_and_access_management.svg" class="gcp gcp--lg mx-auto" />
-    <div class="prob__title mt-3">Authorize by identity</div>
-    <div class="prob__sub">the producer accepts <em>who</em>, by project / IAM</div>
+    <div class="prob__title mt-3">Connection-plane access</div>
+    <div class="prob__sub">the producer accepts <em>which project</em> may connect</div>
   </div>
   <div class="prob items-center text-center">
     <img src="./assets/gcp/cloud_network.svg" class="gcp gcp--lg mx-auto" />
     <div class="prob__title mt-3">Network abstracted</div>
-    <div class="prob__sub">no CIDRs, peering, or firewall rules</div>
+    <div class="prob__sub">no peering, no shared CIDRs, topology hidden</div>
   </div>
   <div class="prob items-center text-center">
     <img src="./assets/gcp/private_service_connect.svg" class="gcp gcp--lg mx-auto" />
@@ -383,8 +383,8 @@ transition: fade-out
 <div class="h-full flex flex-col">
 
 <div class="kicker kicker--pain">Reality check</div>
-<h1 class="mt-2 !text-4xl">Is PSC a <span class="grad-pain">silver bullet</span>?</h1>
-<p class="dim mt-1 max-w-3xl">Not quite. Acceptance is <strong>project-level</strong> — you authorize a whole consumer project, not one workload.</p>
+<h1 class="mt-2 !text-4xl">PSC stops at the <span class="grad-pain">connection plane</span></h1>
+<p class="dim mt-1 max-w-3xl">Its access control authorizes a whole consumer <strong>project</strong> at connect time. Per-caller intent is a <strong>request-plane</strong> decision — one layer up.</p>
 
 <div class="flex-1 flex flex-col justify-center">
 
@@ -403,7 +403,7 @@ transition: fade-out
   </div>
 </div>
 
-<p class="text-center text-lg mt-8">Want “only cart-service”? Enforce <em>caller identity</em> at the service — mTLS / IAM.</p>
+<p class="text-center text-lg mt-8">Want “only cart-service”? That's the <strong>request plane</strong> — enforce caller identity at the service via mTLS / IAM.</p>
 
 </div>
 
